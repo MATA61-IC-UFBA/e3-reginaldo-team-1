@@ -16,18 +16,16 @@ DIGITO          [0-9]
 INTEIRO         ({DIGITO})+
 LETRA           [a-zA-Z]
 SIMBOLO         ("+"|"-"|"*"|"/"|"%"|"!"|"<"|">"|"="|":"|";"|","|"("|")"|"["|"]"|"{"|"}"|"\\")
-CARACTERE       [']([^'\\\n]|\\(.|\n))[']/*Não foi preciso definir um retorno para isto no exercicio e3*/
+CARACTERE       [']([^'\\\n]|\\(.|\n))[']
 IDENTIFICADOR   {LETRA}+({LETRA}|{DIGITO}|{UNDERSCOR})*
 STRING          ["]([^'\\\n]|\\(.|\n))*["]
         
 
 %%
-{COMENTARIO}                                       {/* pula comentario */}
-{ESPACEJAMENTO}                                    {/* pula espacejamento */}
-{STRING}                                           { return STR; }
+
 "array"                                            {return ARRAY;}
 "boolean"                                          {return BOOLEAN;}
-"char"                                             {return CHAR;}
+"char"                                             {return CARACTER;}
 "else"                                             {return ELSE;}
 "false"                                            {return FALSE;}
 "for"                                              {return FOR;}
@@ -40,14 +38,19 @@ STRING          ["]([^'\\\n]|\\(.|\n))*["]
 "true"                                             {return TRUE;}
 "void"                                             {return VOID;}
 "while"                                            {return WHILE;} 
-{SIMBOLO}                                          { return yytext[0]; }/*substituir este*/
 "<="                                               {return LTE;}
 ">="                                               {return GTE;}
 "=="                                               {return EQU;}
 "!="                                               {return NEQ;}
 "&&"                                               {return AND;}
 "||"                                               {return OR;}
+{COMENTARIO}                                       {/* pula comentario */}
+{ESPACEJAMENTO}                                    {/* pula espacejamento */}
+{CARACTERE}                                        { return CHAR; }/*char: \t,\n, \0 ... etc */
+{SIMBOLO}                                          { return yytext[0]; }
+{STRING}                                           { return STR; }
 {INTEIRO}                                          { return NUM; }
 {IDENTIFICADOR}                                    { return ID; }
 . 				                                   { return ERROR; }
+
 %%

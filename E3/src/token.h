@@ -5,7 +5,7 @@ typedef enum {
 	NUM, 
         ARRAY,
         BOOLEAN,
-        CHAR,
+        CARACTER,
         ELSE,
         FALSE,
         FOR,
@@ -24,7 +24,7 @@ typedef enum {
         NEQ,
         AND,
         OR,
+        CHAR,
 	STR,
 	ERROR
 } token_t; 
-
