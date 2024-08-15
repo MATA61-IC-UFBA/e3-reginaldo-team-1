@@ -1,4 +1,4 @@
-install:
+makinstall:
 	sudo apt-get install -f flex
 
 compile:
